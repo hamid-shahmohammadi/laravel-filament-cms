@@ -50,19 +50,23 @@ class PostResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ]),
-                    Forms\Components\FileUpload::make('thumbnail'),
+                    
                     Forms\Components\RichEditor::make('body')
                         ->required()
                         ->columnSpanFull(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
                     Forms\Components\DateTimePicker::make('published_at'),
+                    
+                ])->columnSpan(8),
+                Card::make()->schema([
+                    Forms\Components\FileUpload::make('thumbnail'),
                     Forms\Components\Select::make('category_id')
-                        ->multiple()
-                        ->relationship('categories', 'title')
-                        ->required(),
-                ]),
-            ]);
+                    ->multiple()
+                    ->relationship('categories', 'title')
+                    ->required(),
+                ])->columnSpan(4),
+            ])->columns(12);
     }
 
     public static function table(Table $table): Table
@@ -72,7 +76,7 @@ class PostResource extends Resource
                 Tables\Columns\ImageColumn::make('thumbnail')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable(),               
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('published_at')
@@ -81,7 +85,7 @@ class PostResource extends Resource
                 // Tables\Columns\TextColumn::make('user.name')
                 //     ->numeric()
                 //     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
