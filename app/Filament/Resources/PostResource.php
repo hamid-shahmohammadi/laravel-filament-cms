@@ -50,14 +50,15 @@ class PostResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ]),
-                    
+                    \Filament\Forms\Components\DateTimePicker::make('jdate')->jalali(),
+
                     Forms\Components\RichEditor::make('body')
                         ->required()
                         ->columnSpanFull(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
                     Forms\Components\DateTimePicker::make('published_at'),
-                    
+
                 ])->columnSpan(8),
                 Card::make()->schema([
                     Forms\Components\FileUpload::make('thumbnail'),
