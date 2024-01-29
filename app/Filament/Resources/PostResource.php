@@ -54,7 +54,7 @@ class PostResource extends Resource
                         ->columnSpanFull(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
-                    Forms\Components\DateTimePicker::make('published_at'),
+                    Forms\Components\DateTimePicker::make('published_at')->jalali(),
                 ])->columnSpan(8),
                 Card::make()->schema([
                     Forms\Components\FileUpload::make('thumbnail')
@@ -81,8 +81,8 @@ class PostResource extends Resource
 
                 Tables\Columns\IconColumn::make('active')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('published_at')->jalaliDateTime()
+                    // ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
