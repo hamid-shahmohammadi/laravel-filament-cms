@@ -18,7 +18,6 @@ class Post extends Model
         'active',
         'published_at',
         'user_id',
-        'jdate'
     ];
 
     public function user(): BelongsTo

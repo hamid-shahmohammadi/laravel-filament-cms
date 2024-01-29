@@ -50,14 +50,14 @@ class PostResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ]),
-                    \Filament\Forms\Components\DateTimePicker::make('jdate')->jalali(),
+                    
 
                     Forms\Components\RichEditor::make('body')
                         ->required()
                         ->columnSpanFull(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
-                    Forms\Components\DateTimePicker::make('published_at'),
+                    Forms\Components\DateTimePicker::make('published_at')->jalali(),
 
                 ])->columnSpan(8),
                 Card::make()->schema([
@@ -81,11 +81,8 @@ class PostResource extends Resource
                 Tables\Columns\IconColumn::make('active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime()
+                ->jalaliDateTime()
                     ->sortable(),
-                // Tables\Columns\TextColumn::make('user.name')
-                //     ->numeric()
-                //     ->sortable(),
 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
