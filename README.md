@@ -1,12 +1,20 @@
 ## cmd
 ```
-composer require ariaieboy/filament-jalali-datetimepicker
+composer require pxlrbt/filament-excel
 ```
 ## /home/shah/sec/laravel-filament-cms/app/Filament/Resources/PostResource.php
 
 ```
-Forms\Components\DateTimePicker::make('published_at')->jalali(),
-Tables\Columns\TextColumn::make('published_at')
-                ->jalaliDateTime()
-                    ->sortable(),
+->bulkActions([
+    Tables\Actions\BulkActionGroup::make([
+        Tables\Actions\DeleteBulkAction::make(),
+        ExportBulkAction::make()->exports([
+            ExcelExport::make()->withColumns([
+                Column::make('title'),
+                Column::make('slug'),
+                Column::make('body'),
+            ]),
+        ]),
+    ]),
+]);
 ```

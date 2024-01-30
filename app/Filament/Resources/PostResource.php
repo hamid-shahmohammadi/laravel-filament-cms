@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Columns\Column;
 
 class PostResource extends Resource
 {
@@ -50,7 +53,7 @@ class PostResource extends Resource
                             ->required()
                             ->maxLength(255),
                     ]),
-                    
+
 
                     Forms\Components\RichEditor::make('body')
                         ->required()
@@ -99,6 +102,13 @@ class PostResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make()->withColumns([
+                            Column::make('title'),
+                            Column::make('slug'),
+                            Column::make('body'),
+                        ]),
+                    ]),
                 ]),
             ]);
     }
