@@ -62,7 +62,8 @@ class PostResource extends Resource
                 ])->columnSpan(8),
                 Card::make()->schema([
                     Forms\Components\FileUpload::make('thumbnail'),
-                    
+
+                    // tree
                     SelectTree::make('category_id')
                         ->relationship('category', 'title', 'parent_id')
                         ->enableBranchNode()
