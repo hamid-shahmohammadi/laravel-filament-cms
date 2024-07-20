@@ -18,6 +18,7 @@ class Post extends Model
         'active',
         'published_at',
         'user_id',
+        'category_id',
     ];
 
     public function user(): BelongsTo
