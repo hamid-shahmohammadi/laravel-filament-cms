@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Category;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -15,6 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('title',255);
             $table->string('slug',255)->unique();
+            $table->foreignIdFor(Category::class, 'parent_id')
+                ->nullable()
+                ->constrained('categories', 'id', 'parent_id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
